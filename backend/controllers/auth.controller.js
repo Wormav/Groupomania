@@ -38,7 +38,7 @@ export const signIn = async (req, res) => {
 
     const email = req.body.email;
     const password = req.body.password;
-    const sql = `SELECT id_user, user_username, user_email,user_password FROM users WHERE user_email= '${email}'`;
+    const sql = `SELECT id_user, user_username, user_email,user_password FROM users WHERE user_email= '${email}' AND user_activ= 1`;
 
     db.query(sql, async (err, result) => {
       if (err) {
