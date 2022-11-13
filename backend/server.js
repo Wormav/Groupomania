@@ -4,6 +4,9 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 dotenv.config({ path: "./config/.env" });
 import authRoutes from "./routes/auth.routes.js";
+import userRoutes from "./routes/user.routes.js";
+import { checkUser } from "./middlewares/checkUser.middleware.js";
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -12,6 +15,7 @@ app.use(cookieParser());
 
 //route
 app.use("/api/auth", authRoutes);
+app.use("/api/user", checkUser, userRoutes);
 
 //server
 app.listen(process.env.PORT, () => {
