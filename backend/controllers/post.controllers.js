@@ -4,14 +4,16 @@ import jwt from "jsonwebtoken";
 export const createPost = async (req, res) => {
   try {
     const content = req.body.content;
-    const file = req.file;
     const userId = jwt.verify(req.cookies.jwt, process.env.TOKEN_SECRET).id;
     const date = new Date().toISOString().slice(0, 19).replace("T", " ");
 
     const sqlContentOnly = `INSERT INTO posts(post_user_id, post_content, post_create_time) VALUES(${userId}, "${content}", "${date}");`;
-
-    if (!file) {
-      db.query(sqlContentOnly, (err, result) => {
+    if (req.file) {
+      const destination = req.file.destination;
+      const filename = req.file.filename;
+      const imageUrl = destination + filename;
+      const sqlPicture = `INSERT INTO posts(post_user_id, post_content ,post_picture, post_create_time) VALUES (${userId}, "${content}","${imageUrl}", "${date}");`;
+      db.query(sqlPicture, (err, result) => {
         if (err) {
           res.status(404).json({ err });
           throw err;
@@ -20,13 +22,13 @@ export const createPost = async (req, res) => {
         }
       });
     } else {
-      const sqlPicture = `INSERT INTO posts(post_user_id, post_content ,post_picture, post_create_time) VALUES (${userId}, "${content}","${req.body.post_image}", "${date}";)`;
-      db.query(sqlPicture, (err, result) => {
+      db.query(sqlContentOnly, (err, result) => {
         if (err) {
           res.status(404).json({ err });
           throw err;
         } else {
           res.status(200).json(result);
+          return;
         }
       });
     }
@@ -40,7 +42,6 @@ export const updatePost = async (req, res) => {
   try {
     const content = req.body.content;
     const file = req.file;
-    const userId = jwt.verify(req.cookies.jwt, process.env.TOKEN_SECRET).id;
     const date = new Date().toISOString().slice(0, 19).replace("T", " ");
     const postId = req.params.id;
 
