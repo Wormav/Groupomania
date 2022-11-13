@@ -6,6 +6,7 @@ dotenv.config({ path: "./config/.env" });
 import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import followRoutes from "./routes/follow.routes.js";
+import likeRoutes from "./routes/like.routes.js";
 import { checkUser } from "./middlewares/checkUser.middleware.js";
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/user", checkUser, userRoutes);
 app.use("/api/follow", checkUser, followRoutes);
+app.use("api/like", checkUser, likeRoutes);
 
 //server
 app.listen(process.env.PORT, () => {
