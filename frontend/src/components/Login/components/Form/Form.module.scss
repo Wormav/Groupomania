@@ -1,0 +1,38 @@
+input,
+button {
+  height: 60px;
+  width: 100%;
+  outline: none;
+  font-family: inherit;
+  font-size: 18px;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+input {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  color: inherit;
+
+  &:focus {
+    border-color: var(--primary);
+  }
+}
+
+button {
+  background-color: var(--primary);
+  margin-bottom: 1rem;
+
+  &:hover {
+    filter: brightness(80%);
+  }
+}
+
+a {
+  color: var(--secondary);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--primary);
+  }
+}

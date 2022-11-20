@@ -1,18 +1,20 @@
 import React from "react";
+import styles from "./Form.module.scss";
+import "./Form.module.scss";
 
 export default function Form() {
   return (
-    <form className="form">
-      <div className="textbox">
-        <input type="email" placeholder="test placeholder" />
-        <span className="material-symbols-outlined"></span>
+    <form>
+      <div>
+        <input type="email" placeholder=" email" required />
       </div>
-      <div className="textbox">
-        <input type="password" placeholder="test placeholder" />
-        <span className="material-symbols-outlined"></span>
+      <div>
+        <input type="password" placeholder=" mots de passe" required />
       </div>
-      <button type="submit">Test btn</button>
-      <a href="#">test link</a>
+      <div>
+        <button type="submit">Connexion</button>
+        <a>Crée un compte</a>
+      </div>
     </form>
   );
 }

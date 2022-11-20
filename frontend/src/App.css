@@ -4,3 +4,11 @@
   padding: 2rem;
   text-align: center;
 }
+
+body {
+  background: linear-gradient(
+    320deg,
+    rgba(253, 45, 1, 1) 0%,
+    rgba(255, 215, 215, 1) 60%
+  );
+}
