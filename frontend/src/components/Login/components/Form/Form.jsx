@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Form.module.scss";
 import "./Form.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { registerForm } from "../../../../redux";
 
 export default function Form() {
+  const formType = useSelector((state) => state.login);
+  const dispatch = useDispatch();
+
   return (
     <form>
       <div>
@@ -13,7 +18,13 @@ export default function Form() {
       </div>
       <div>
         <button type="submit">Connexion</button>
-        <a>Crée un compte</a>
+        <a
+          onClick={(e) => {
+            dispatch(registerForm(formType));
+          }}
+        >
+          Crée un compte
+        </a>
       </div>
     </form>
   );
