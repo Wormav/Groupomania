@@ -6,7 +6,7 @@ import "./Avatar.module.scss";
 export default function Avatar() {
   return (
     <div className={`${styles.container}`}>
-      <img src="/icon.png" />
+      <img src="/icon.png" alt="logo de Groupomania" />
     </div>
   );
 }

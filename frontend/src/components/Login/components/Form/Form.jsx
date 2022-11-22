@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import styles from "./Form.module.scss";
+import React from "react";
 import "./Form.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { registerForm } from "../../../../redux";
+import { registerForm } from "../../../../store/login.store.jsx";
 
 export default function Form() {
   const formType = useSelector((state) => state.login);
@@ -10,21 +9,40 @@ export default function Form() {
 
   return (
     <form>
+      {formType && (
+        <div>
+          <input type="text" placeholder="Pseudo" required />
+        </div>
+      )}
       <div>
-        <input type="email" placeholder=" email" required />
+        <input type="email" placeholder="email" required />
       </div>
       <div>
-        <input type="password" placeholder=" mots de passe" required />
+        <input type="password" placeholder="mots de passe" required />
       </div>
       <div>
-        <button type="submit">Connexion</button>
-        <a
-          onClick={(e) => {
-            dispatch(registerForm(formType));
-          }}
-        >
-          Crée un compte
-        </a>
+        {formType ? (
+          <button type="submit">S'inscrire</button>
+        ) : (
+          <button type="submit">Connexion</button>
+        )}
+        {formType ? (
+          <a
+            onClick={(e) => {
+              dispatch(registerForm(formType));
+            }}
+          >
+            Se connecter
+          </a>
+        ) : (
+          <a
+            onClick={(e) => {
+              dispatch(registerForm(formType));
+            }}
+          >
+            Crée un compte
+          </a>
+        )}
       </div>
     </form>
   );

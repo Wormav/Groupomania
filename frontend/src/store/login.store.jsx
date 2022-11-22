@@ -5,11 +5,7 @@ const loginSlice = createSlice({
   initialState: false,
   reducers: {
     registerForm: (state) => {
-      if (state === false) {
-        state = true;
-      } else {
-        state = false;
-      }
+      state = !state;
       return state;
     },
   },

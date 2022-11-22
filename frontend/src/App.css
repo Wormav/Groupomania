@@ -1,11 +1,13 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
 }
 
 body {
+  width: 100vw;
+  height: 100vh;
   background: linear-gradient(
     320deg,
     rgba(253, 45, 1, 1) 0%,
