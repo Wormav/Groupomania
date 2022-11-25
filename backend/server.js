@@ -10,8 +10,11 @@ import likeRoutes from "./routes/like.routes.js";
 import postRoutes from "./routes/post.routes.js";
 import commentRoutes from "./routes/comment.routes.js";
 import { checkUser } from "./middlewares/checkUser.middleware.js";
+import cors from "cors";
 
 const app = express();
+
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
