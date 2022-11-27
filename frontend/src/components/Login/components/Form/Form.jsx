@@ -3,50 +3,20 @@ import "./Form.module.scss";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import yupPassword from "yup-password";
-yupPassword(yup);
+
+import { schemaRegister } from "../../../../tools/yup";
 
 export default function Form() {
   const [registerForm, setRegisterForm] = useState(false);
   const [responseMessage, setResponseMessage] = useState(null);
 
-  const schema = yup
-    .object({
-      pseudo: yup
-        .string()
-        .min(5, "Le pseudo doit contenir au moins 5 caractères !")
-        .required("Pseudo requis !"),
-
-      email: yup
-        .string()
-        .email("Veuillez entrer un email valide !")
-        .required("Email requis !"),
-      password: yup
-        .string()
-        .min(8, "Le mot de passe doit contenir au moins 8 caractères !")
-        .minLowercase(
-          1,
-          "Le mot de passe doit contenir au moins une lettre minuscule !"
-        )
-        .minUppercase(
-          1,
-          "Le mot de passe doit contenir au moins une lettre majuscule"
-        )
-        .minNumbers(1, "Le mot de passe doit contenir au moins un chiffe")
-        .minSymbols(1, "Le mot de passe doit contenir au moins un symbole")
-        .required("Le mot de passe est requis !"),
-    })
-    .required();
-
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({ resolver: yupResolver(schemaRegister) });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
     if (registerForm) {
       axios
         .post("http://localhost:5001/api/auth/signup", {
@@ -69,17 +39,19 @@ export default function Form() {
           const response = res.data;
           console.log(response); // a retirer
           setResponseMessage(response.message);
-        });
+        })
+        .catch(setResponseMessage(`cette email n'existe pas`));
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <input type="text" placeholder="Pseudo" {...register("pseudo")} />
-        {errors.pseudo && <span>{errors.pseudo.message}</span>}
-      </div>
-
+      {registerForm && (
+        <div>
+          <input type="text" placeholder="Pseudo" {...register("pseudo")} />
+          {errors.pseudo && <span>{errors.pseudo.message}</span>}
+        </div>
+      )}
       <div>
         <input type="text" placeholder="email" {...register("email")} />
         {errors.email && <span>{errors.email.message}</span>}
