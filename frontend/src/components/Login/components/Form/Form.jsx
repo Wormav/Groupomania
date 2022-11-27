@@ -19,7 +19,7 @@ export default function Form() {
     if (registerForm) {
       axios
         .post(
-          "http://localhost:5001/api/auth/signup",
+          `${import.meta.env.VITE_URL}auth/signup`,
           {
             username: data.pseudo,
             email: data.email,
@@ -42,7 +42,7 @@ export default function Form() {
     } else {
       axios
         .post(
-          "http://localhost:5001/api/auth/signin",
+          `${import.meta.env.VITE_URL}auth/signin`,
           {
             email: data.email,
             password: data.password,

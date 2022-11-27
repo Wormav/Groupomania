@@ -1,17 +1,20 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import cookie from "js-cookie";
 
 const loginSlice = createSlice({
-  name: "login",
+  name: "logged",
   initialState: false,
   reducers: {
-    registerForm: (state) => {
-      state = !state;
+    isLogged: (state) => {
+      const token = cookie.get("jwt");
+      if (token) state = true;
+      else state = false;
       return state;
     },
   },
 });
 
-export const { registerForm } = loginSlice.actions;
+export const { isLogged } = loginSlice.actions;
 
 export const store = configureStore({
   reducer: {
