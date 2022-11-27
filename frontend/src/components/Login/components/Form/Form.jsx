@@ -3,7 +3,6 @@ import "./Form.module.scss";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import { schemaRegister } from "../../../../tools/yup";
 
 export default function Form() {
@@ -28,6 +27,13 @@ export default function Form() {
           const response = res.data;
           console.log(response); // a retirer
           setResponseMessage(response.message);
+        })
+        .catch((err) => {
+          if (err.message === "Network Error") {
+            setResponseMessage("Erreur du serveur");
+          } else {
+            setResponseMessage(err.message);
+          }
         });
     } else {
       axios
@@ -40,7 +46,15 @@ export default function Form() {
           console.log(response); // a retirer
           setResponseMessage(response.message);
         })
-        .catch(setResponseMessage(`cette email n'existe pas`));
+        .catch((err) => {
+          if (err.message === "Network Error") {
+            setResponseMessage("Erreur du serveur");
+          } else if (err.message === "Request failed with status code 500") {
+            setResponseMessage(`Cette email n'existe pas`);
+          } else {
+            setResponseMessage(err.message);
+          }
+        });
     }
   };
 
