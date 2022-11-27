@@ -18,11 +18,15 @@ export default function Form() {
   const onSubmit = async (data) => {
     if (registerForm) {
       axios
-        .post("http://localhost:5001/api/auth/signup", {
-          username: data.pseudo,
-          email: data.email,
-          password: data.password,
-        })
+        .post(
+          "http://localhost:5001/api/auth/signup",
+          {
+            username: data.pseudo,
+            email: data.email,
+            password: data.password,
+          },
+          { withCredentials: true }
+        )
         .then((res) => {
           const response = res.data;
           console.log(response); // a retirer
@@ -37,10 +41,14 @@ export default function Form() {
         });
     } else {
       axios
-        .post("http://localhost:5001/api/auth/signin", {
-          email: data.email,
-          password: data.password,
-        })
+        .post(
+          "http://localhost:5001/api/auth/signin",
+          {
+            email: data.email,
+            password: data.password,
+          },
+          { withCredentials: true }
+        )
         .then((res) => {
           const response = res.data;
           console.log(response); // a retirer
