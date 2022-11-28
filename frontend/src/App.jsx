@@ -1,12 +1,11 @@
 import React from "react";
 import { useState } from "react";
-import { Provider } from "react-redux";
 import "./App.css";
 import { UidContex } from "./components/context/AppContext";
 import Login from "./components/Login/Login";
-import { store } from "./store/login.store";
 import axios from "axios";
 import { useEffect } from "react";
+import RoutesApp from "./components/Routes/Routes";
 
 function App() {
   const [uid, setUid] = useState(null);
@@ -19,7 +18,6 @@ function App() {
         })
         .then((res) => {
           setUid(res.data);
-          console.log(res);
         })
         .catch((err) => console.log("no token"));
     };
@@ -28,9 +26,7 @@ function App() {
 
   return (
     <UidContex.Provider value={uid}>
-      <Provider store={store}>
-        <Login />
-      </Provider>
+      {uid ? <RoutesApp /> : <Login />}
     </UidContex.Provider>
   );
 }

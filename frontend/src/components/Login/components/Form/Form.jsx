@@ -29,7 +29,6 @@ export default function Form() {
         )
         .then((res) => {
           const response = res.data;
-          console.log(response); // a retirer
           setResponseMessage(response.message);
         })
         .catch((err) => {
@@ -51,8 +50,8 @@ export default function Form() {
         )
         .then((res) => {
           const response = res.data;
-          console.log(response); // a retirer
           setResponseMessage(response.message);
+          window.location = "/";
         })
         .catch((err) => {
           if (err.message === "Network Error") {
