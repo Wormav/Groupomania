@@ -1,3 +1,3 @@
 import { createContext } from "react";
 
-export const UidContex = createContext();
+export const UidContexUidContex = createContext();
