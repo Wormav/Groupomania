@@ -1,14 +1,39 @@
 import React from "react";
-import { Provider } from "react-redux";
-import "./App.css";
+import { useState } from "react";
+import "./App.module.scss";
+import { UidContex } from "./components/context/AppContext";
 import Login from "./components/Login/Login";
-import { store } from "./store/login.store";
+import axios from "axios";
+import { useEffect } from "react";
+import RoutesApp from "./components/Routes/Routes";
 
 function App() {
+  const [uid, setUid] = useState(null);
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      await axios
+        .get(`${import.meta.env.VITE_URL}auth/jwt`, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          setUid(res.data);
+        })
+        .catch((err) => console.log("no token"));
+    };
+    fetchToken();
+  }, []);
+
   return (
-    <Provider store={store}>
-      <Login />
-    </Provider>
+    <UidContex.Provider value={uid}>
+      {uid ? (
+        <>
+          <RoutesApp />
+        </>
+      ) : (
+        <Login />
+      )}
+    </UidContex.Provider>
   );
 }
 

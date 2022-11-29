@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./Form.module.scss";
+import React, { useState, useContext } from "react";
+import styles from "./Form.module.scss";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -19,7 +19,7 @@ export default function Form() {
     if (registerForm) {
       axios
         .post(
-          "http://localhost:5001/api/auth/signup",
+          `${import.meta.env.VITE_URL}auth/signup`,
           {
             username: data.pseudo,
             email: data.email,
@@ -29,7 +29,6 @@ export default function Form() {
         )
         .then((res) => {
           const response = res.data;
-          console.log(response); // a retirer
           setResponseMessage(response.message);
         })
         .catch((err) => {
@@ -42,7 +41,7 @@ export default function Form() {
     } else {
       axios
         .post(
-          "http://localhost:5001/api/auth/signin",
+          `${import.meta.env.VITE_URL}auth/signin`,
           {
             email: data.email,
             password: data.password,
@@ -51,8 +50,8 @@ export default function Form() {
         )
         .then((res) => {
           const response = res.data;
-          console.log(response); // a retirer
           setResponseMessage(response.message);
+          if (res.data.user) window.location = "/";
         })
         .catch((err) => {
           if (err.message === "Network Error") {
@@ -70,29 +69,53 @@ export default function Form() {
     <form onSubmit={handleSubmit(onSubmit)}>
       {registerForm && (
         <div>
-          <input type="text" placeholder="Pseudo" {...register("pseudo")} />
-          {errors.pseudo && <span>{errors.pseudo.message}</span>}
+          <input
+            className={`${styles.loginInput}`}
+            type="text"
+            placeholder="Pseudo"
+            {...register("pseudo")}
+          />
+          {errors.pseudo && (
+            <span className={`${styles.loginSpan}`}>
+              {errors.pseudo.message}
+            </span>
+          )}
         </div>
       )}
       <div>
-        <input type="text" placeholder="email" {...register("email")} />
-        {errors.email && <span>{errors.email.message}</span>}
+        <input
+          className={`${styles.loginInput}`}
+          type="text"
+          placeholder="email"
+          {...register("email")}
+        />
+        {errors.email && (
+          <span className={`${styles.loginSpan}`}>{errors.email.message}</span>
+        )}
       </div>
 
       <div>
         <input
+          className={`${styles.loginInput}`}
           type="password"
           placeholder="mots de passe"
           {...register("password")}
         />
-        {errors.password && <span>{errors.password.message}</span>}
-        {responseMessage && <span>{responseMessage}</span>}
+        {errors.password && (
+          <span className={`${styles.loginSpan}`}>
+            {errors.password.message}
+          </span>
+        )}
+        {responseMessage && (
+          <span className={`${styles.loginSpan}`}>{responseMessage}</span>
+        )}
       </div>
-      <div>
-        <button type="submit">
+      <div className={`${styles.divButton}`}>
+        <button className={`${styles.loginBtn}`} type="submit">
           {registerForm ? "S'inscrire" : "Se connecter"}
         </button>
         <a
+          className={`${styles.loginLink}`}
           onClick={(e) => {
             setRegisterForm(!registerForm);
           }}
