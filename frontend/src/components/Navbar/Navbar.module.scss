@@ -57,15 +57,18 @@
 
 @media screen and (max-width: 500px) {
   .liste {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 80%;
+    height: 29%;
     flex-direction: column;
-    height: 200px;
-  }
-  .items:nth-child(1) {
-    border-top: 1px solid #fff;
-    margin-top: 50px;
   }
 
   .items {
+    display: flex;
+    margin: 0;
+    justify-content: center;
     height: 50px;
     width: 100%;
     border-bottom: 1px solid #fff;
@@ -73,11 +76,14 @@
   }
 
   .items:nth-child(4) {
-    display: block;
+    display: flex;
   }
 
   .btn {
     display: block;
+    border: none;
+    background: none;
+    font-size: 30px;
     position: absolute;
     right: 10px;
     top: 10px;

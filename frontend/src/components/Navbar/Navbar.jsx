@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Navbar.module.scss";
 import { BiLogOut } from "react-icons/bi";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 export default function Navbar() {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -30,7 +31,7 @@ export default function Navbar() {
     <nav className={`${styles.navBar}`}>
       <img
         className={`${styles.navImg}`}
-        src="./public/icon.png"
+        src="/icon.png"
         alt="icon groupomania"
       />
       {(toggleMenu || widthScreen > 500) && (
@@ -47,9 +48,10 @@ export default function Navbar() {
         className={`${styles.navInput}`}
       ></input>
       <BiLogOut className={`${styles.navLogout}`} />
-      <button onClick={toggleNavSmallScreen} className={`${styles.btn}`}>
-        ...
-      </button>
+      <RxHamburgerMenu
+        onClick={toggleNavSmallScreen}
+        className={`${styles.btn}`}
+      />
     </nav>
   );
 }
