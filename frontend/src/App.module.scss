@@ -5,9 +5,5 @@ body {
   align-items: center;
   min-height: 100vh;
   min-width: 320px;
-  background: linear-gradient(
-    320deg,
-    rgba(253, 45, 1, 1) 0%,
-    rgba(255, 215, 215, 1) 60%
-  );
+  background: var(--back);
 }

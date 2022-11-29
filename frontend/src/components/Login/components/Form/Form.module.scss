@@ -16,13 +16,13 @@
   padding: 0 5px;
 
   &:focus {
-    border-color: var(--primary);
+    border-color: var(--text);
   }
 }
 
 .loginBtn {
   width: 100%;
-  background-color: var(--primary);
+  background-color: var(--text);
   margin-bottom: 1rem;
 
   &:hover {
@@ -42,11 +42,11 @@
   cursor: pointer;
 
   &:hover {
-    color: var(--primary);
+    filter: brightness(80%);
   }
 }
 
 .loginSpan {
-  color: var(--primary);
+  color: red;
   width: 95%;
 }
