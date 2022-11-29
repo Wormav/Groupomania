@@ -1,12 +1,14 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Avatar from "../Login/components/avatar/Avatar";
+import "./Routes.module.scss";
+import Navbar from "../Navbar/Navbar";
 
 export default function RoutesApp() {
   return (
     <>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<Avatar />} />
+        <Route path="/" element={<div>route</div>} />
         <Route path="*" element={<div>404</div>} />
       </Routes>
     </>

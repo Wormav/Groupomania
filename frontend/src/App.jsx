@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import "./App.css";
+import "./App.module.scss";
 import { UidContex } from "./components/context/AppContext";
 import Login from "./components/Login/Login";
 import axios from "axios";
@@ -26,7 +26,13 @@ function App() {
 
   return (
     <UidContex.Provider value={uid}>
-      {uid ? <RoutesApp /> : <Login />}
+      {uid ? (
+        <>
+          <RoutesApp />
+        </>
+      ) : (
+        <Login />
+      )}
     </UidContex.Provider>
   );
 }

@@ -1,19 +1,24 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 300px;
   background-color: var(--dark);
   border-radius: 22px;
-  padding: 70px 30px 44px;
+
+  padding: 50px 20px 44px;
 }
 
-h2 {
+.loginTitle {
   font-size: 36px;
   font-weight: 500;
   color: var(--primary);
 }
 
-h3 {
+.loginText {
+  margin-top: -10px;
   color: var(--secondary);
-  margin: 1rem 0 0 0;
   font-weight: 500;
   font-size: 16px;
 }

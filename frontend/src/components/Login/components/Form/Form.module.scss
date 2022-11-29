@@ -1,5 +1,5 @@
-input,
-button {
+.loginInput,
+.loginBtn {
   height: 40px;
   outline: none;
   font-family: inherit;
@@ -8,7 +8,7 @@ button {
   margin-top: 1rem;
 }
 
-input {
+.loginInput {
   width: 95%;
   background: transparent;
   border: 2px solid rgba(255, 255, 255, 0.1);
@@ -20,7 +20,7 @@ input {
   }
 }
 
-button {
+.loginBtn {
   width: 100%;
   background-color: var(--primary);
   margin-bottom: 1rem;
@@ -30,7 +30,14 @@ button {
   }
 }
 
-a {
+.divButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.loginLink {
   color: var(--secondary);
   cursor: pointer;
 
@@ -39,6 +46,7 @@ a {
   }
 }
 
-span {
+.loginSpan {
   color: var(--primary);
+  width: 95%;
 }
