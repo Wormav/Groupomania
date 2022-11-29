@@ -12,6 +12,7 @@
   height: 30px;
   width: 30px;
   margin: 0 50px 0 10px;
+  cursor: pointer;
 }
 
 .navInput {
@@ -45,6 +46,7 @@
   margin-right: 30px;
   color: white;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .items:nth-child(4) {
@@ -77,6 +79,8 @@
 
   .items:nth-child(4) {
     display: flex;
+    background: none;
+    border: none;
   }
 
   .btn {
