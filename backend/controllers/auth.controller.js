@@ -79,5 +79,5 @@ export const signIn = async (req, res) => {
 
 export const signOut = async (req, res) => {
   res.clearCookie("jwt");
-  res.status(200).json({ message: "utilisiteur déconecté" });
+  res.redirect("/");
 };
