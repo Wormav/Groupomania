@@ -5,6 +5,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import cookie from "js-cookie";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
   const [toggleMenu, setToggleMenu] = useState(false);

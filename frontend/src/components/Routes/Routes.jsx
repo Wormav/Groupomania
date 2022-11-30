@@ -5,6 +5,7 @@ import Navbar from "../Navbar/Navbar";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { userIdDataFunction } from "../../store/user.store";
+import Profil from "../Profil/Profil";
 
 export default function RoutesApp({ uid }) {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ export default function RoutesApp({ uid }) {
       <Navbar />
       <Routes>
         <Route path="/" element={<div>route</div>} />
+        <Route path="/profil" element={<Profil />}></Route>
         <Route path="*" element={<div>404</div>} />
       </Routes>
     </div>
