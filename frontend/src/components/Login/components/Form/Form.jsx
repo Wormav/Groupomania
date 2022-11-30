@@ -51,7 +51,9 @@ export default function Form() {
         .then((res) => {
           const response = res.data;
           setResponseMessage(response.message);
-          if (res.data.user) window.location = "/";
+          if (res.data.user) {
+            window.location = "/";
+          }
         })
         .catch((err) => {
           if (err.message === "Network Error") {

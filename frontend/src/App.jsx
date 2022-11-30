@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import "./App.module.scss";
-import { UidContex } from "./components/context/AppContext";
+import { Provider } from "react-redux";
 import Login from "./components/Login/Login";
 import axios from "axios";
 import { useEffect } from "react";
+import { userStore } from "./store/user.store.jsx";
 import RoutesApp from "./components/Routes/Routes";
 
 function App() {
@@ -25,15 +26,15 @@ function App() {
   }, []);
 
   return (
-    <UidContex.Provider value={uid}>
+    <Provider store={userStore}>
       {uid ? (
         <>
-          <RoutesApp />
+          <RoutesApp uid={uid} />
         </>
       ) : (
         <Login />
       )}
-    </UidContex.Provider>
+    </Provider>
   );
 }
 

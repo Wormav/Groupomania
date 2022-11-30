@@ -62,7 +62,7 @@ export default function Navbar() {
       {(toggleMenu || widthScreen > 500) && (
         <ul className={`${styles.liste}`}>
           <Link to="/" className={`${styles.items}`}>
-            Acceuil
+            Accueil
           </Link>
           <Link to="/profil" className={`${styles.items}`}>
             Profil
