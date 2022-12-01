@@ -11,7 +11,7 @@ export const createPost = async (req, res) => {
     if (req.file) {
       const destination = req.file.destination;
       const filename = req.file.filename;
-      const imageUrl = destination + filename;
+      const imageUrl = "." + destination.substr(8) + "/" + filename;
       const sqlPicture = `INSERT INTO posts(post_user_id, post_content ,post_picture, post_create_time) VALUES (${userId}, "${content}","${imageUrl}", "${date}");`;
       db.query(sqlPicture, (err, result) => {
         if (err) {

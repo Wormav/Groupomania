@@ -51,7 +51,7 @@ export const updateUser = async (req, res) => {
     if (req.file) {
       const destination = req.file.destination;
       const filename = req.file.filename;
-      const imageUrl = destination + filename;
+      const imageUrl = "." + destination.substr(8) + "/" + filename;
 
       const sqlImage = `UPDATE users SET user_picture= "${imageUrl}" WHERE id_user = ${id} AND user_activ= 1;`;
       db.query(sqlImage, (err, result) => {
