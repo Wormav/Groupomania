@@ -8,8 +8,9 @@ export default function Profil() {
     <>
       {dataUser && (
         <>
-          <h1>{`${dataUser.user_username}`}</h1>
-          <img src={`${dataUser.user_picture}`}></img>
+          <h1>{dataUser.user_username}</h1>
+          <img src={dataUser.user_picture}></img>
+          <p>{dataUser.user_email}</p>
         </>
       )}
     </>

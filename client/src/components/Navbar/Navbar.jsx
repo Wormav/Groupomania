@@ -57,7 +57,7 @@ export default function Navbar() {
       <img
         onClick={clickImg}
         className={`${styles.navImg}`}
-        src="/icon.png"
+        src="/public/icons/icon.png"
         alt="icon groupomania"
       />
       {(toggleMenu || widthScreen > 500) && (
