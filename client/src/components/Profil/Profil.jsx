@@ -1,18 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import styles from "./Profil.module.scss";
 import { FiMail } from "react-icons/fi";
+import axios from "axios";
+import { useState } from "react";
 
 export default function Profil() {
-  const dataUser = useSelector((state) => state.user);
-  console.log(dataUser);
+  const url = window.location.pathname;
+  const userId = parseInt(url.substring(8));
+
+  const [dataUser, setDataUser] = useState(null);
+
+  const getUser = async (id) => {
+    axios
+      .get(`${import.meta.env.VITE_URL}user/${id}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setDataUser(res.data[0]);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    getUser(userId);
+  }, []);
+
   return (
     <>
-      {dataUser && (
+      {dataUser ? (
         <div className={`${styles.container}`}>
           <img
             className={`${styles.picture}`}
-            src={dataUser.user_picture}
+            src={"../" + `${dataUser.user_picture}`}
           ></img>
           <div className={`${styles.card}`}>
             <h1 className={`${styles.pseudo}`}>{dataUser.user_username}</h1>
@@ -38,6 +58,11 @@ export default function Profil() {
             </div>
           </div>
         </div>
+      ) : (
+        <>
+          <h1>user not find</h1>
+          {/* a remplacer par page 404 */}
+        </>
       )}
     </>
   );

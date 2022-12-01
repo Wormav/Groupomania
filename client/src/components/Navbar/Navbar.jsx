@@ -8,6 +8,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 export default function Navbar() {
+  const dataUser = useSelector((state) => state.user);
   const [toggleMenu, setToggleMenu] = useState(false);
   const [widthScreen, setWidthScreen] = useState(window.innerWidth);
 
@@ -65,7 +66,10 @@ export default function Navbar() {
           <Link to="/" className={`${styles.items}`}>
             Accueil
           </Link>
-          <Link to="/profil" className={`${styles.items}`}>
+          <Link
+            to={"/profil/" + `${dataUser.id_user}`}
+            className={`${styles.items}`}
+          >
             Profil
           </Link>
           <Link to="/message" className={`${styles.items}`}>

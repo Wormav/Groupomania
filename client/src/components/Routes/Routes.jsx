@@ -28,7 +28,7 @@ export default function RoutesApp({ uid }) {
       <Navbar />
       <Routes>
         <Route path="/" element={<div>route</div>} />
-        <Route path="/profil" element={<Profil />}></Route>
+        <Route path="/profil/:id" element={<Profil />}></Route>
         <Route path="*" element={<div>404</div>} />
       </Routes>
     </div>
