@@ -4,6 +4,7 @@ import styles from "./Profil.module.scss";
 import { FiMail } from "react-icons/fi";
 import axios from "axios";
 import { useState } from "react";
+import Follow from "../Follow/Follow";
 
 export default function Profil() {
   const url = window.location.pathname;
@@ -24,7 +25,7 @@ export default function Profil() {
 
   useEffect(() => {
     getUser(userId);
-  }, []);
+  }, [userId]);
 
   return (
     <>
@@ -52,6 +53,7 @@ export default function Profil() {
               </div>
               <p className={`${styles.bio}`}>{dataUser.user_bio}</p>
             </div>
+            <Follow id={userId} />
             <div className={`${styles.btn_container}`}>
               <button className={`${styles.btn}`}>Suivre</button>
               <button className={`${styles.btn_reverse}`}>Message</button>

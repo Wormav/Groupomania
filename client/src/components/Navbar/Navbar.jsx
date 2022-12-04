@@ -47,7 +47,9 @@ export default function Navbar() {
       .get(`${import.meta.env.VITE_URL}auth/signout`, {
         withCredentials: true,
       })
-      .then(() => removeCookie("jwt"))
+      .then(() => {
+        removeCookie("jwt");
+      })
       .catch((err) => console.log(err));
 
     window.location = "/";

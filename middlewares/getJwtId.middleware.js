@@ -8,7 +8,6 @@ export const getJwtId = (req, res, next) => {
         console.log(err);
         res.send(200).json("no token");
       } else {
-        console.log(result.id);
         res.status(200).json(result.id);
         next();
       }

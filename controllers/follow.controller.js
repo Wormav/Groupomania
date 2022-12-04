@@ -49,7 +49,7 @@ export const removeFollow = async (req, res) => {
 
 export const getFollower = async (req, res) => {
   try {
-    const userID = req.body.id;
+    const userID = req.params.id;
     const sql = `SELECT follow_id_user FROM follows WHERE  follow_id_follow = ${userID};`;
 
     db.query(sql, (err, result) => {
@@ -70,7 +70,7 @@ export const getFollower = async (req, res) => {
 
 export const getFollowing = async (req, res) => {
   try {
-    const userID = req.body.id;
+    const userID = req.params.id;
     const sql = `SELECT follow_id_follow FROM follows WHERE  follow_id_user = ${userID};`;
 
     db.query(sql, (err, result) => {
