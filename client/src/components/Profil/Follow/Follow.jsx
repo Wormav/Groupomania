@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Follow.module.scss";
 import axios from "axios";
+import BtnFollow from "./BtnFollow/BtnFollow";
 
 export default function Follow(id) {
   const [follower, setFollower] = useState([]);
@@ -55,6 +56,7 @@ export default function Follow(id) {
           <p className={`${styles.text}`}>
             Abonnement : <span>{`${following.length}`}</span>
           </p>
+          <BtnFollow follower={follower} id={id.id} />
         </>
       )}
     </>
