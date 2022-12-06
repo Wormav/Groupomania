@@ -25,6 +25,7 @@ export default function Profil() {
 
   useEffect(() => {
     getUser(userId);
+    console.log("pas de boucle");
   }, [userId]);
 
   return (
