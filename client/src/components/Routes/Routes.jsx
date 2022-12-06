@@ -3,9 +3,10 @@ import { Routes, Route } from "react-router-dom";
 import styles from "./Routes.module.scss";
 import Navbar from "../Navbar/Navbar";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userIdDataFunction } from "../../store/user.store";
 import Profil from "../Profil/Profil";
+import { useEffect } from "react";
 
 export default function RoutesApp({ uid }) {
   const dispatch = useDispatch();
@@ -21,16 +22,24 @@ export default function RoutesApp({ uid }) {
       .catch((err) => console.log(err));
   };
 
-  getUserData(uid, userIdDataFunction);
+  useEffect(() => {
+    getUserData(uid, userIdDataFunction);
+  }, [uid]);
+
+  const dataUser = useSelector((state) => state.user);
 
   return (
     <div className={`${styles.divRouteContainer}`}>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<div>route</div>} />
-        <Route path="/profil/:id" element={<Profil />}></Route>
-        <Route path="*" element={<div>404</div>} />
-      </Routes>
+      {dataUser && (
+        <>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<div>route</div>} />
+            <Route path="/profil/:id" element={<Profil />}></Route>
+            <Route path="*" element={<div>404</div>} />
+          </Routes>
+        </>
+      )}
     </div>
   );
 }

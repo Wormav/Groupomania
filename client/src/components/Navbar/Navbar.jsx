@@ -11,6 +11,8 @@ export default function Navbar() {
   const dataUser = useSelector((state) => state.user);
   const [toggleMenu, setToggleMenu] = useState(false);
   const [widthScreen, setWidthScreen] = useState(window.innerWidth);
+  const url = window.location.pathname;
+  const userId = parseInt(url.substring(8));
 
   const toggleNavSmallScreen = () => {
     setToggleMenu(!toggleMenu);
@@ -47,10 +49,16 @@ export default function Navbar() {
       .get(`${import.meta.env.VITE_URL}auth/signout`, {
         withCredentials: true,
       })
-      .then(() => removeCookie("jwt"))
+      .then(() => {
+        removeCookie("jwt");
+      })
       .catch((err) => console.log(err));
 
     window.location = "/";
+  };
+
+  const reload = () => {
+    if (dataUser.id_user !== userId) reload();
   };
 
   return (
@@ -67,6 +75,7 @@ export default function Navbar() {
             Accueil
           </Link>
           <Link
+            onClick={reload}
             to={"/profil/" + `${dataUser.id_user}`}
             className={`${styles.items}`}
           >

@@ -46,3 +46,45 @@ export const removeFollow = async (req, res) => {
     return;
   }
 };
+
+export const getFollower = async (req, res) => {
+  try {
+    const userID = req.params.id;
+    const sql = `SELECT follow_id_user FROM follows WHERE  follow_id_follow = ${userID};`;
+
+    db.query(sql, (err, result) => {
+      if (err) {
+        res.status(201).json({
+          message: "impossible de récupéré les follower de cette utilisateur",
+        });
+        throw err;
+      } else {
+        res.status(200).json(result);
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+    return;
+  }
+};
+
+export const getFollowing = async (req, res) => {
+  try {
+    const userID = req.params.id;
+    const sql = `SELECT follow_id_follow FROM follows WHERE  follow_id_user = ${userID};`;
+
+    db.query(sql, (err, result) => {
+      if (err) {
+        res.status(201).json({
+          message: "impossible de récupéré les following de cette utilisateur",
+        });
+        throw err;
+      } else {
+        res.status(200).json(result);
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+    return;
+  }
+};
