@@ -2,10 +2,15 @@ import React, { useEffect, useState } from "react";
 import styles from "./Follow.module.scss";
 import axios from "axios";
 import BtnFollow from "./BtnFollow/BtnFollow";
+import { useSelector } from "react-redux";
 
 export default function Follow(id) {
   const [follower, setFollower] = useState([]);
   const [following, setFollowing] = useState([]);
+  const [changeInFollow, setChangeInFollow] = useState(false);
+
+  const userId = useSelector((state) => state.user).id_user;
+
   const getFollowers = async () => {
     axios
       .get(`${import.meta.env.VITE_URL}follow/follower/${id.id}`, {
@@ -44,7 +49,7 @@ export default function Follow(id) {
   useEffect(() => {
     getFollowers();
     getFollowing();
-  }, []);
+  }, [changeInFollow]);
 
   return (
     <>
@@ -56,7 +61,14 @@ export default function Follow(id) {
           <p className={`${styles.text}`}>
             Abonnement : <span>{`${following.length}`}</span>
           </p>
-          <BtnFollow follower={follower} id={id.id} />
+          {id.id !== userId ? (
+            <BtnFollow
+              follower={follower}
+              id={id.id}
+              changeInFollow={changeInFollow}
+              setChangeInFollow={setChangeInFollow}
+            />
+          ) : null}
         </>
       )}
     </>
