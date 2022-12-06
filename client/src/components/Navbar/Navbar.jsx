@@ -58,7 +58,7 @@ export default function Navbar() {
   };
 
   const reload = () => {
-    if (dataUser.id_user !== userId) reload();
+    if (dataUser.id_user !== userId && url.includes("/profil")) reload();
   };
 
   return (
