@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function PostCard({ data }) {
+  console.log(data);
   return (
     <div>
       <p>

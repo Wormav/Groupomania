@@ -113,7 +113,7 @@ export const getOnePost = async (req, res) => {
 
 export const getAllPost = async (req, res) => {
   try {
-    const sql = `SELECT * FROM posts;`;
+    const sql = `SELECT * FROM posts INNER JOIN users ON posts.post_user_id = users.id_user ;`;
 
     db.query(sql, (err, result) => {
       if (err) {
