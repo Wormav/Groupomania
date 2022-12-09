@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import PostCard from "./components/PostCard/PostCard";
+import styles from "./Post.module.scss";
 
 export default function Post() {
   const [post, setPost] = useState(null);
@@ -22,12 +23,12 @@ export default function Post() {
   }, []);
 
   return (
-    <>
+    <div className={`${styles.container}`}>
       {post !== null ? (
         <>{post && post.map((p) => <PostCard key={p.id_post} data={p} />)} </>
       ) : (
         <div>non</div>
       )}
-    </>
+    </div>
   );
 }
