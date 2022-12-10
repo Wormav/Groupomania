@@ -1,13 +1,27 @@
 import React from "react";
 import styles from "./PostCard.module.scss";
+import axios from "axios";
 import { AiOutlineLike } from "react-icons/ai";
+import { RxCross2 } from "react-icons/rx";
+import { BiPencil } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 
-export default function PostCard({ data }) {
+export default function PostCard({ data, userId, updatePost, setUpdatePost }) {
   const navigate = useNavigate();
 
   const ppClick = () => {
     navigate(`/profil/${data.id_user}`);
+  };
+
+  const deletePost = async () => {
+    axios
+      .delete(`${import.meta.env.VITE_URL}post/${data.id_post}`, {
+        withCredentials: true,
+      })
+      .then((res) => setPost(res.data))
+      .catch((err) => console.log(err));
+
+    setUpdatePost(!updatePost);
   };
 
   return (
@@ -20,6 +34,12 @@ export default function PostCard({ data }) {
           onClick={ppClick}
         />
         <h1>{data.user_username}</h1>
+        {data.id_user === userId ? (
+          <>
+            <RxCross2 className={`${styles.cross}`} onClick={deletePost} />
+            <BiPencil className={`${styles.pen}`} />
+          </>
+        ) : null}
       </div>
       <p className={`${styles.content}`}>
         {data.post_content}

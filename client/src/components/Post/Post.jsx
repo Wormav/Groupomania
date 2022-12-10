@@ -1,13 +1,15 @@
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import PostCard from "./components/PostCard/PostCard";
 import styles from "./Post.module.scss";
 
 export default function Post() {
   const [post, setPost] = useState(null);
-  const [addPost, setAddPost] = useState(false);
+  const [updatePost, setUpdatePost] = useState(false);
+
+  const userId = useSelector((state) => state.user).id_user;
 
   const getPost = async () => {
     axios
@@ -20,12 +22,24 @@ export default function Post() {
 
   useEffect(() => {
     getPost();
-  }, []);
+    console.log("pas de boucle");
+  }, [updatePost]);
 
   return (
     <div className={`${styles.container}`}>
       {post !== null ? (
-        <>{post && post.map((p) => <PostCard key={p.id_post} data={p} />)} </>
+        <>
+          {post &&
+            post.map((p) => (
+              <PostCard
+                key={p.id_post}
+                data={p}
+                userId={userId}
+                updatePost={updatePost}
+                setUpdatePost={setUpdatePost}
+              />
+            ))}{" "}
+        </>
       ) : (
         <div>non</div>
       )}
