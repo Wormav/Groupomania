@@ -22,5 +22,7 @@ export const schemaRegister = yup
       )
       .minNumbers(1, "Le mot de passe doit contenir au moins un chiffe")
       .minSymbols(1, "Le mot de passe doit contenir au moins un symbole"),
+
+    content: yup.string().min(1),
   })
   .required();

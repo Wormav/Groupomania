@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import PostCard from "./components/PostCard/PostCard";
 import styles from "./Post.module.scss";
+import NewPost from "./components/NewPost/NewPost";
 
 export default function Post() {
   const [post, setPost] = useState(null);
@@ -29,6 +30,7 @@ export default function Post() {
     <div className={`${styles.container}`}>
       {post !== null ? (
         <>
+          <NewPost updatePost={updatePost} setUpdatePost={setUpdatePost} />
           {post &&
             post.map((p) => (
               <PostCard
