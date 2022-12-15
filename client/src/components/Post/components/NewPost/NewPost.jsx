@@ -52,12 +52,8 @@ export default function NewPost({ updatePost, setUpdatePost }) {
           />
         </div>
         <div className={`${styles.container_btn}`}>
-          <input
-            type="file"
-            name="post_image"
-            onChange={changeHandler}
-            className={`${styles.images}`}
-          />
+          <input type="file" name="post_image" onChange={changeHandler} />
+
           <button type="submit" className={`${styles.btn}`}>
             Poster
           </button>
