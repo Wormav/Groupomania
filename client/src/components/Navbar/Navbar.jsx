@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Navbar.module.scss";
 import { MdOutlineLogout } from "react-icons/md";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import cookie from "js-cookie";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -58,7 +58,9 @@ export default function Navbar() {
   };
 
   const reload = () => {
-    if (dataUser.id_user !== userId && url.includes("/profil")) reload();
+    if (dataUser.id_user !== userId && url.includes("/profil"))
+      useNavigate("/");
+    useNavigate("/profil/" + `${dataUser.id_user}`);
   };
 
   return (

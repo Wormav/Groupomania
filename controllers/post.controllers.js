@@ -93,10 +93,10 @@ export const deletePost = async (req, res) => {
   }
 };
 
-export const getOnePost = async (req, res) => {
+export const getPostUser = async (req, res) => {
   try {
-    const postId = req.params.id;
-    const sql = `SELECT * FROM posts WHERE id_post = ${postId};`;
+    const userId = req.params.id;
+    const sql = `SELECT * FROM posts WHERE post_user_id = ${userId} ;`;
 
     db.query(sql, (err, result) => {
       if (err) {

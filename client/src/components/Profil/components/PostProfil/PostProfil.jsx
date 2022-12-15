@@ -1,16 +1,11 @@
 import React from "react";
-import styles from "./PostCard.module.scss";
+import styles from "./PostProfil.module.scss";
 import axios from "axios";
 import { AiOutlineLike } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
-import { useNavigate } from "react-router-dom";
 
-export default function PostCard({ data, userId, updatePost, setUpdatePost }) {
-  const navigate = useNavigate();
-
-  const ppClick = () => {
-    navigate(`/profil/${data.id_user}`);
-  };
+export default function PostCard({ data, userId, dataUser }) {
+  console.log(data);
 
   const deletePost = async () => {
     if (confirm("Voulez-vous supprimer ce post ?")) {
@@ -20,8 +15,6 @@ export default function PostCard({ data, userId, updatePost, setUpdatePost }) {
         })
         .then((res) => setPost(res.data))
         .catch((err) => console.log(err));
-
-      setUpdatePost(!updatePost);
     }
   };
 
@@ -29,13 +22,12 @@ export default function PostCard({ data, userId, updatePost, setUpdatePost }) {
     <div className={`${styles.container}`}>
       <div className={`${styles.header}`}>
         <img
-          src={data.user_picture}
+          src={"../" + `${dataUser.user_picture}`}
           alt="photo de profil"
           className={`${styles.pp}`}
-          onClick={ppClick}
         />
-        <h1>{data.user_username}</h1>
-        {data.id_user === userId ? (
+        <h1>{dataUser.user_username}</h1>
+        {dataUser.id_user === userId ? (
           <>
             <RxCross2 className={`${styles.cross}`} onClick={deletePost} />
           </>
@@ -45,7 +37,7 @@ export default function PostCard({ data, userId, updatePost, setUpdatePost }) {
         {data.post_content}
         {data.post_picture && (
           <img
-            src={data.post_picture}
+            src={"../" + `${data.post_picture}`}
             alt="image du post"
             className={`${styles.content_img}`}
           ></img>

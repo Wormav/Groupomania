@@ -23,7 +23,6 @@ export default function Post() {
 
   useEffect(() => {
     getPost();
-    console.log("pas de boucle");
   }, [updatePost]);
 
   return (
