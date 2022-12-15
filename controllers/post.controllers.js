@@ -2,6 +2,7 @@ import db from "../config/db.js";
 import jwt from "jsonwebtoken";
 
 export const createPost = async (req, res) => {
+  console.log(req.file);
   try {
     const content = req.body.content;
     const userId = jwt.verify(req.cookies.jwt, process.env.TOKEN_SECRET).id;
@@ -92,10 +93,10 @@ export const deletePost = async (req, res) => {
   }
 };
 
-export const getOnePost = async (req, res) => {
+export const getPostUser = async (req, res) => {
   try {
-    const postId = req.params.id;
-    const sql = `SELECT * FROM posts WHERE id_post = ${postId};`;
+    const userId = req.params.id;
+    const sql = `SELECT * FROM posts WHERE post_user_id = ${userId} ;`;
 
     db.query(sql, (err, result) => {
       if (err) {
@@ -113,7 +114,7 @@ export const getOnePost = async (req, res) => {
 
 export const getAllPost = async (req, res) => {
   try {
-    const sql = `SELECT * FROM posts;`;
+    const sql = `SELECT * FROM posts INNER JOIN users ON posts.post_user_id = users.id_user ORDER BY post_create_time DESC ;`;
 
     db.query(sql, (err, result) => {
       if (err) {

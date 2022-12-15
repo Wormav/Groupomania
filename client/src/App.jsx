@@ -6,7 +6,7 @@ import Login from "./components/Login/Login";
 import axios from "axios";
 import { useEffect } from "react";
 import { userStore } from "./store/user.store.jsx";
-import RoutesApp from "./components/Routes/Routes";
+import RoutesApp from "./Routes/Routes";
 
 function App() {
   const [uid, setUid] = useState(null);

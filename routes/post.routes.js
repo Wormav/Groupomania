@@ -4,7 +4,7 @@ import {
   createPost,
   updatePost,
   deletePost,
-  getOnePost,
+  getPostUser,
 } from "../controllers/post.controllers.js";
 
 import upload from "../middlewares/multer.middleware.js";
@@ -12,7 +12,7 @@ import upload from "../middlewares/multer.middleware.js";
 const router = Router();
 
 router.get("/", getAllPost);
-router.get("/:id", getOnePost);
+router.get("/:id", getPostUser);
 router.post("/", upload.single("post_image"), createPost);
 router.put("/:id", upload.single("post_image"), updatePost);
 router.delete("/:id", deletePost);

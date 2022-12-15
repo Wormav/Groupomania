@@ -1,16 +1,20 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
 import styles from "./Profil.module.scss";
 import { FiMail } from "react-icons/fi";
 import axios from "axios";
 import { useState } from "react";
-import Follow from "./Follow/Follow";
+import Follow from "./components/Follow/Follow";
+import PostProfil from "./components/PostProfil/PostProfil";
+import { useSelector } from "react-redux";
 
 export default function Profil() {
   const url = window.location.pathname;
   const userId = parseInt(url.substring(8));
 
   const [dataUser, setDataUser] = useState(null);
+  const [dataPost, setDataPost] = useState(null);
+
+  const userIdCo = useSelector((state) => state.user).id_user;
 
   const getUser = async (id) => {
     axios
@@ -23,9 +27,20 @@ export default function Profil() {
       .catch((err) => console.log(err));
   };
 
+  const getPostUser = async (id) => {
+    axios
+      .get(`${import.meta.env.VITE_URL}post/${id}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setDataPost(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     getUser(userId);
-    console.log("pas de boucle");
+    getPostUser(userId);
   }, [userId]);
 
   return (
@@ -55,6 +70,20 @@ export default function Profil() {
               <p className={`${styles.bio}`}>{dataUser.user_bio}</p>
             </div>
             <Follow id={userId} />
+          </div>
+          <div className={`${styles.post}`}>
+            {dataPost &&
+              dataPost
+
+                .map((p) => (
+                  <PostProfil
+                    key={p.id_post}
+                    data={p}
+                    userId={userIdCo}
+                    dataUser={dataUser}
+                  />
+                ))
+                .reverse()}
           </div>
         </div>
       ) : (
