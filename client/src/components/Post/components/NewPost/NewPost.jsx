@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./NewPost.module.scss";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -9,26 +9,31 @@ import axios from "axios";
 export default function NewPost({ updatePost, setUpdatePost }) {
   const dataUser = useSelector((state) => state.user);
 
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schemaRegister) });
+  const [selectedFile, setSelectedFile] = useState();
+  const changeHandler = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const { handleSubmit, register, reset } = useForm({
+    resolver: yupResolver(schemaRegister),
+  });
 
   const addPost = async (data) => {
-    axios
-      .post(
-        `${import.meta.env.VITE_URL}post`,
-        {
-          content: data.content,
-          post_image: data.file,
-        },
-        {
-          withCredentials: true,
-        }
-      )
+    const content = data.content;
+    const formData = new FormData();
+    formData.append("content", content);
+    formData.append("post_image", selectedFile);
+
+    await axios
+      .post(`${import.meta.env.VITE_URL}post`, formData, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log(res);
+      })
       .catch((err) => console.log(err));
     setUpdatePost(!updatePost);
+    reset();
   };
 
   return (
@@ -49,8 +54,9 @@ export default function NewPost({ updatePost, setUpdatePost }) {
         <div className={`${styles.container_btn}`}>
           <input
             type="file"
+            name="post_image"
+            onChange={changeHandler}
             className={`${styles.images}`}
-            {...register("file")}
           />
           <button type="submit" className={`${styles.btn}`}>
             Poster

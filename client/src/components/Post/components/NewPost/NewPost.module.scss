@@ -7,7 +7,7 @@
   border-bottom: solid rgb(185, 183, 183);
   max-width: 800px;
   width: 100%;
-  padding: 10px;
+  padding: 10px 0;
   &_input {
     display: flex;
     justify-content: center;
@@ -38,6 +38,7 @@
   width: 80%;
   min-height: 50px;
   border-radius: 20px;
+  padding: 0 10px;
 }
 
 .btn {
