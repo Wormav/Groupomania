@@ -14,14 +14,16 @@ export default function PostCard({ data, userId, updatePost, setUpdatePost }) {
   };
 
   const deletePost = async () => {
-    axios
-      .delete(`${import.meta.env.VITE_URL}post/${data.id_post}`, {
-        withCredentials: true,
-      })
-      .then((res) => setPost(res.data))
-      .catch((err) => console.log(err));
+    if (confirm("Voulez-vous supprimer ce post ?")) {
+      axios
+        .delete(`${import.meta.env.VITE_URL}post/${data.id_post}`, {
+          withCredentials: true,
+        })
+        .then((res) => setPost(res.data))
+        .catch((err) => console.log(err));
 
-    setUpdatePost(!updatePost);
+      setUpdatePost(!updatePost);
+    }
   };
 
   return (

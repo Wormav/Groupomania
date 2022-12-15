@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaRegister } from "../../../../tools/yup.js";
+
 import axios from "axios";
 
 export default function NewPost({ updatePost, setUpdatePost }) {
@@ -52,7 +53,12 @@ export default function NewPost({ updatePost, setUpdatePost }) {
           />
         </div>
         <div className={`${styles.container_btn}`}>
-          <input type="file" name="post_image" onChange={changeHandler} />
+          <input
+            type="file"
+            name="post_image"
+            onChange={changeHandler}
+            className={`${styles.container_imgInput}`}
+          />
 
           <button type="submit" className={`${styles.btn}`}>
             Poster
