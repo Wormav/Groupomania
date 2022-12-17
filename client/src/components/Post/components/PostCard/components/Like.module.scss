@@ -1,0 +1,17 @@
+.icon {
+  font-size: 25px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  &:hover {
+    cursor: pointer;
+  }
+  &__active {
+    color: var(--primary);
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

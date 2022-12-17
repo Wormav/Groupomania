@@ -3,6 +3,7 @@ import styles from "./PostProfil.module.scss";
 import axios from "axios";
 import { AiOutlineLike } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
+import Like from "../../../Post/components/PostCard/components/Like";
 
 export default function PostCard({ data, userId, dataUser }) {
   console.log(data);
@@ -46,9 +47,7 @@ export default function PostCard({ data, userId, dataUser }) {
       <div className={`${styles.comment_container}`}>
         <div className={`${styles.comment_bar}`}></div>
         <div className={`${styles.comment_main}`}>
-          <p>
-            100 <AiOutlineLike />
-          </p>
+          <Like postId={data.id_post} />
           <p>
             100 <span>commentaires</span>
           </p>
