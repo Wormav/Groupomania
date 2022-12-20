@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import styles from "./BtnComment.module.scss";
 import axios from "axios";
 
-export default function BtnComment({ postId }) {
+export default function BtnComment({
+  postId,
+  setDataComment,
+  clickBtnCommentToggle,
+}) {
   const [commentData, setCommentData] = useState(null);
-
-  console.log(postId);
 
   const getComment = async () => {
     axios
@@ -14,6 +16,7 @@ export default function BtnComment({ postId }) {
       })
       .then((res) => {
         setCommentData(res.data);
+        setDataComment(res.data);
       })
       .catch((err) => console.log(err));
   };
@@ -23,7 +26,7 @@ export default function BtnComment({ postId }) {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div onClick={clickBtnCommentToggle} className={styles.container}>
       {commentData ? (
         <>
           <span className={styles.element}>{commentData.length}</span>
