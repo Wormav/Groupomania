@@ -3,7 +3,8 @@ import styles from "./PostCard.module.scss";
 import axios from "axios";
 import { RxCross2 } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
-import Like from "./components/Like";
+import Like from "./components/Like/Like";
+import BtnComment from "./components/Comment/components/BtnComment/BtnComment";
 
 export default function PostCard({ data, userId, updatePost, setUpdatePost }) {
   const navigate = useNavigate();
@@ -55,9 +56,7 @@ export default function PostCard({ data, userId, updatePost, setUpdatePost }) {
         <div className={`${styles.comment_bar}`}></div>
         <div className={`${styles.comment_main}`}>
           <Like postId={data.id_post} />
-          <p>
-            100 <span>commentaires</span>
-          </p>
+          <BtnComment postId={data.id_post} />
         </div>
       </div>
     </div>
