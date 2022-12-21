@@ -6,7 +6,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaRegister } from "../../../../../../../../tools/yup";
 import { useSelector } from "react-redux";
 
-export default function FormComment({ postId }) {
+export default function FormComment({
+  postId,
+  setUpdateComment,
+  updateComment,
+}) {
   const userCo = useSelector((state) => state.user);
 
   const { handleSubmit, register, reset } = useForm({
@@ -25,7 +29,8 @@ export default function FormComment({ postId }) {
         }
       )
       .then((res) => {
-        //mettre update comment pour re render les commentaire les btncomm
+        setUpdateComment(!updateComment);
+        reset();
       })
       .catch((err) => console.log(err));
   };

@@ -1,58 +1,33 @@
-import React, { useEffect, useState } from "react";
-import styles from "./Comment.module.scss";
-import { RxCross2 } from "react-icons/rx";
-import axios from "axios";
+import React, { useState } from "react";
+import FormComment from "./components/FormComment/FormComment";
+import CommentCard from "./components/CommentCard/CommentCard";
+import { useEffect } from "react";
 
-export default function Comment({ userCo, dataComment }) {
-  const [dataUser, setDataUser] = useState(null);
-
-  const getUser = async () => {
-    axios
-      .get(`${import.meta.env.VITE_URL}user/${dataComment.comment_user_id}`, {
-        withCredentials: true,
-      })
-      .then((res) => setDataUser(res.data))
-      .catch((err) => console.log(err));
-  };
-
-  const deleteComment = async () => {
-    axios
-      .delete(`${import.meta.env.VITE_URL}comment/${dataComment.id_comment}`, {
-        withCredentials: true,
-      })
-      .then((res) => console.log("ok"))
-      .catch((err) => console.log(err));
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
+export default function Comment({
+  postId,
+  dataComment,
+  userCo,
+  setUpdateComment,
+  updateComment,
+}) {
   return (
     <>
-      {dataUser && (
-        <div className={`${styles.container}`}>
-          <div className={`${styles.container__head}`}>
-            <img
-              src={dataUser[0].user_picture}
-              alt="photo de profil"
-              className={`${styles.pp}`}
-            />
-            <span className={`${styles.name}`}>
-              {dataUser[0].user_username}
-            </span>
-            {dataComment.comment_user_id === userCo ? (
-              <>
-                <RxCross2
-                  className={`${styles.cross}`}
-                  onClick={deleteComment}
-                />
-              </>
-            ) : null}
-          </div>
-          <p className={`${styles.content}`}>{dataComment.comment_content}</p>
-        </div>
-      )}
+      <FormComment
+        postId={postId}
+        setUpdateComment={setUpdateComment}
+        updateComment={updateComment}
+      />
+      {dataComment &&
+        dataComment.map((c) => (
+          <CommentCard
+            key={c.id_comment}
+            postid={postId}
+            dataComment={c}
+            userCo={userCo}
+            setUpdateComment={setUpdateComment}
+            updateComment={updateComment}
+          />
+        ))}
     </>
   );
 }

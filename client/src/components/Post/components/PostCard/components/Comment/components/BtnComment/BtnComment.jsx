@@ -6,6 +6,8 @@ export default function BtnComment({
   postId,
   setDataComment,
   clickBtnCommentToggle,
+  setUpdateComment,
+  updateComment,
 }) {
   const [commentData, setCommentData] = useState(null);
 
@@ -23,7 +25,7 @@ export default function BtnComment({
 
   useEffect(() => {
     getComment();
-  }, []);
+  }, [updateComment]);
 
   return (
     <div onClick={clickBtnCommentToggle} className={styles.container}>

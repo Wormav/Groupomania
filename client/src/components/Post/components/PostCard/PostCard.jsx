@@ -6,14 +6,13 @@ import { useNavigate } from "react-router-dom";
 import Like from "./components/Like/Like";
 import BtnComment from "./components/Comment/components/BtnComment/BtnComment";
 import { useState } from "react";
-import { useEffect } from "react";
-import FormComment from "./components/Comment/components/FormComment/FormComment";
 import Comment from "./components/Comment/Comment";
 
 export default function PostCard({ data, userId, updatePost, setUpdatePost }) {
   const navigate = useNavigate();
   const [dataComment, setDataComment] = useState(null);
   const [clickBtnComment, setClickBtnComment] = useState(false);
+  const [updateComment, setUpdateComment] = useState(false);
 
   const clickBtnCommentToggle = () => {
     setClickBtnComment(!clickBtnComment);
@@ -71,6 +70,8 @@ export default function PostCard({ data, userId, updatePost, setUpdatePost }) {
               clickBtnCommentToggle={clickBtnCommentToggle}
               postId={data.id_post}
               setDataComment={setDataComment}
+              setUpdateComment={setUpdateComment}
+              updateComment={updateComment}
             />
           </div>
         </div>
@@ -78,18 +79,13 @@ export default function PostCard({ data, userId, updatePost, setUpdatePost }) {
 
       {clickBtnComment && (
         <>
-          <FormComment postId={data.id_post} />
-          {dataComment &&
-            dataComment
-              .reverse()
-              .map((c) => (
-                <Comment
-                  key={c.id_comment}
-                  postId={data.id_post}
-                  dataComment={c}
-                  userCo={userId}
-                />
-              ))}
+          <Comment
+            postId={data.id_post}
+            dataComment={dataComment}
+            userCo={userId}
+            setUpdateComment={setUpdateComment}
+            updateComment={updateComment}
+          />
         </>
       )}
     </>
