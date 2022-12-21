@@ -26,7 +26,7 @@ export const createComment = async (req, res) => {
 
 export const deleteComment = async (req, res) => {
   try {
-    const commentId = req.body.commentId;
+    const commentId = req.params.id;
     const userId = jwt.verify(req.cookies.jwt, process.env.TOKEN_SECRET).id;
 
     const sql = `DELETE FROM comments WHERE id_comment=${commentId} AND comment_user_id=${userId}`;
@@ -45,10 +45,10 @@ export const deleteComment = async (req, res) => {
   }
 };
 export const getAllComment = async (req, res) => {
-  const postId = req.body.postId;
+  const postId = req.params.id;
 
   try {
-    const sql = `SELECT * FROM comments WHERE comment_post_id=${postId};`;
+    const sql = `SELECT * FROM comments WHERE comment_post_id=${postId} ORDER BY comment_create_time DESC;`;
 
     db.query(sql, (err, result) => {
       if (err) {
@@ -66,7 +66,7 @@ export const getAllComment = async (req, res) => {
 export const updateComment = async (req, res) => {
   try {
     const userId = jwt.verify(req.cookies.jwt, process.env.TOKEN_SECRET).id;
-    const commentId = req.body.commentId;
+    const commentId = req.params.id;
     const content = req.body.content;
     const date = new Date().toISOString().slice(0, 19).replace("T", " ");
 

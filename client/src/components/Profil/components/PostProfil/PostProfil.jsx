@@ -3,7 +3,7 @@ import styles from "./PostProfil.module.scss";
 import axios from "axios";
 import { AiOutlineLike } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
-import Like from "../../../Post/components/PostCard/components/Like";
+import Like from "../../../../components/Post/components/PostCard/components/Like/Like";
 
 export default function PostCard({ data, userId, dataUser }) {
   console.log(data);
@@ -18,7 +18,6 @@ export default function PostCard({ data, userId, dataUser }) {
         .catch((err) => console.log(err));
     }
   };
-
   return (
     <div className={`${styles.container}`}>
       <div className={`${styles.header}`}>

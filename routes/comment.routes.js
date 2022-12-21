@@ -9,8 +9,8 @@ import {
 const router = Router();
 
 router.post("/:id", createComment);
-router.delete("/", deleteComment);
+router.delete("/:id", deleteComment);
 router.get("/:id", getAllComment);
-router.put("/", updateComment);
+router.put("/:id", updateComment);
 
 export default router;
