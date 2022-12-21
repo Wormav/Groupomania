@@ -48,7 +48,7 @@ export const getAllComment = async (req, res) => {
   const postId = req.params.id;
 
   try {
-    const sql = `SELECT * FROM comments WHERE comment_post_id=${postId};`;
+    const sql = `SELECT * FROM comments WHERE comment_post_id=${postId} ORDER BY comment_create_time DESC;`;
 
     db.query(sql, (err, result) => {
       if (err) {

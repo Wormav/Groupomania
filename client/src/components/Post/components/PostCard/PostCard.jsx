@@ -8,6 +8,7 @@ import BtnComment from "./components/Comment/components/BtnComment/BtnComment";
 import { useState } from "react";
 import { useEffect } from "react";
 import FormComment from "./components/Comment/components/FormComment/FormComment";
+import Comment from "./components/Comment/Comment";
 
 export default function PostCard({ data, userId, updatePost, setUpdatePost }) {
   const navigate = useNavigate();
@@ -34,8 +35,6 @@ export default function PostCard({ data, userId, updatePost, setUpdatePost }) {
       setUpdatePost(!updatePost);
     }
   };
-
-  useEffect(() => {}, [clickBtnComment]);
 
   return (
     <>
@@ -79,8 +78,18 @@ export default function PostCard({ data, userId, updatePost, setUpdatePost }) {
 
       {clickBtnComment && (
         <>
-          <div className={`${styles.comment_bar}`}></div>
           <FormComment postId={data.id_post} />
+          {dataComment &&
+            dataComment
+              .reverse()
+              .map((c) => (
+                <Comment
+                  key={c.id_comment}
+                  postId={data.id_post}
+                  dataComment={c}
+                  userCo={userId}
+                />
+              ))}
         </>
       )}
     </>

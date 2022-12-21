@@ -1,6 +1,8 @@
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: relative;
   margin-top: -12px;
   margin-bottom: 10px;
@@ -10,16 +12,10 @@
   max-width: 800px;
   width: 100%;
   padding: 10px 0;
-  &_input {
+
+  &__head {
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  &_btn {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
     align-items: center;
   }
 }
@@ -36,24 +32,14 @@
   }
 }
 
-.input {
-  width: 80%;
-  min-height: 50px;
-  border-radius: 20px;
-  padding: 0 10px;
+.name {
+  font-weight: bold;
 }
 
-.btn {
-  background-color: var(--primary);
-  border-radius: 20px;
-  height: 35px;
+.cross {
+  position: absolute;
   font-size: 20px;
-  color: var(--back);
-  padding: 0 10px;
-  margin-right: 30px;
+  right: 5px;
+  top: 5px;
   cursor: pointer;
-
-  &:hover {
-    filter: brightness(80%);
-  }
 }
