@@ -5,10 +5,12 @@ import { useSelector } from "react-redux";
 import PostCard from "./components/PostCard/PostCard";
 import styles from "./Post.module.scss";
 import NewPost from "./components/NewPost/NewPost";
+import Filter from "./components/Filter/Filter";
 
 export default function Post() {
   const [post, setPost] = useState(null);
   const [updatePost, setUpdatePost] = useState(false);
+  const [filterValue, setFilterValue] = useState(false);
 
   const userId = useSelector((state) => state.user).id_user;
 
@@ -30,6 +32,7 @@ export default function Post() {
       {post !== null ? (
         <>
           <NewPost updatePost={updatePost} setUpdatePost={setUpdatePost} />
+          <Filter filterValue={filterValue} setFilterValue={setFilterValue} />
           {post &&
             post.map((p) => (
               <PostCard
