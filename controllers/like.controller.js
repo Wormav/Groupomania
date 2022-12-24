@@ -66,3 +66,21 @@ export const getLike = async (req, res) => {
     return;
   }
 };
+
+export const getAllLike = async (req, res) => {
+  try {
+    const sql = `SELECT * FROM likes;`;
+
+    db.query(sql, (err, result) => {
+      if (err) {
+        res.status(404).json({ err });
+        throw err;
+      } else {
+        res.status(200).json(result);
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+    return;
+  }
+};

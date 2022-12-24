@@ -12,7 +12,7 @@ export default function Like({ postId }) {
 
   const getLike = async () => {
     axios
-      .get(`${import.meta.env.VITE_URL}like/${postId}`, {
+      .get(`${import.meta.env.VITE_URL}like/getlike/${postId}`, {
         withCredentials: true,
       })
       .then((res) => {

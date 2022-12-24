@@ -11,6 +11,7 @@ export default function Post() {
   const [post, setPost] = useState(null);
   const [updatePost, setUpdatePost] = useState(false);
   const [filterValue, setFilterValue] = useState(false);
+  const [likesData, setLikesData] = useState(null);
 
   const userId = useSelector((state) => state.user).id_user;
 
@@ -19,13 +20,41 @@ export default function Post() {
       .get(`${import.meta.env.VITE_URL}post`, {
         withCredentials: true,
       })
-      .then((res) => setPost(res.data))
+      .then((res) => setPost(res.data), setLikesData(null))
+      .catch((err) => console.log(err));
+
+    axios
+      .get(`${import.meta.env.VITE_URL}like/getalllike`, {
+        withCredentials: true,
+      })
+      .then((res) => setLikesData(res.data))
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    getPost();
-  }, [updatePost]);
+    if (filterValue === false) {
+      getPost();
+    } else {
+      putPost();
+    }
+  }, [updatePost, filterValue]);
+
+  const putPost = () => {
+    likesData.map((l) => {
+      const idPost = l.like_post_id;
+      const idUser = l.like_user_id;
+      post.map((p) => {
+        if (p.arrayLikes === null) {
+          p.arrayLikes = [];
+        }
+        if (idPost === p.id_post) {
+          p.arrayLikes.push(idUser);
+        }
+      });
+    });
+  };
+
+  console.log(post);
 
   return (
     <div className={`${styles.container}`}>
@@ -44,9 +73,7 @@ export default function Post() {
               />
             ))}{" "}
         </>
-      ) : (
-        <div>non</div>
-      )}
+      ) : null}
     </div>
   );
 }
