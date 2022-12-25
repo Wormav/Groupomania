@@ -91,6 +91,7 @@ export const disableUser = async (req, res) => {
         throw err;
       } else {
         res.status(200).json(result);
+        res.clearCookie();
       }
     });
   } catch (err) {

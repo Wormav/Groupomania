@@ -8,6 +8,7 @@ import PostProfil from "./components/PostProfil/PostProfil";
 import { useSelector } from "react-redux";
 import { BsPencil } from "react-icons/bs";
 import EditProfil from "./components/EditProfil/EditProfil";
+import DeleteAccount from "./components/DeleteAccount/DeleteAccount";
 
 export default function Profil() {
   const url = window.location.pathname;
@@ -99,11 +100,11 @@ export default function Profil() {
                 ))
                 .reverse()}
           </div>
+          {userIdCo === userId ? <DeleteAccount id={userIdCo} /> : null}
         </div>
       ) : (
         <>
           <h1>user not find</h1>
-          {/* a remplacer par page 404 */}
         </>
       )}
     </>

@@ -7,10 +7,11 @@ import { schemaRegister } from "../../../../tools/yup.js";
 
 import axios from "axios";
 
-export default function NewPost({ updatePost, setUpdatePost }) {
+export default function NewPost({ updatePost, setUpdatePost, setYoutubeUrl }) {
   const dataUser = useSelector((state) => state.user);
 
   const [selectedFile, setSelectedFile] = useState();
+
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0]);
   };
@@ -18,6 +19,12 @@ export default function NewPost({ updatePost, setUpdatePost }) {
   const { handleSubmit, register, reset } = useForm({
     resolver: yupResolver(schemaRegister),
   });
+
+  const listenIfYoutube = (e) => {
+    if (e.target.value.includes("youtube.com")) {
+      setYoutubeUrl(e.target.value);
+    }
+  };
 
   const addPost = async (data) => {
     const content = data.content;
@@ -29,9 +36,7 @@ export default function NewPost({ updatePost, setUpdatePost }) {
       .post(`${import.meta.env.VITE_URL}post`, formData, {
         withCredentials: true,
       })
-      .then((res) => {
-        console.log(res);
-      })
+      .then((res) => {})
       .catch((err) => console.log(err));
     setUpdatePost(!updatePost);
     reset();
@@ -50,6 +55,7 @@ export default function NewPost({ updatePost, setUpdatePost }) {
             className={`${styles.input}`}
             type="text"
             {...register("content")}
+            onChange={(e) => listenIfYoutube(e)}
           />
         </div>
         <div className={`${styles.container_btn}`}>
