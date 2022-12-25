@@ -49,7 +49,7 @@ export default function EditProfil({ dataUser, setOpenModal }) {
             onClick={() => setOpenModal(false)}
           />
         </div>
-        <form onSubmit={handleSubmit(putProfil)}>
+        <form onSubmit={handleSubmit(putProfil)} className={`${styles.form}`}>
           <input
             type="file"
             name="profil_image"

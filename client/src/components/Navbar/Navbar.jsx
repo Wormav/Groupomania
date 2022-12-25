@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import cookie from "js-cookie";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import SearchBar from "./components/SearchBar/SearchBar";
 
 export default function Navbar() {
   const dataUser = useSelector((state) => state.user);
@@ -91,11 +92,7 @@ export default function Navbar() {
           </button>
         </ul>
       )}
-      <input
-        type="text"
-        placeholder="recherche"
-        className={`${styles.navInput}`}
-      ></input>
+      <SearchBar />
       <MdOutlineLogout className={`${styles.navLogout}`} onClick={logout} />
       <RxHamburgerMenu
         onClick={toggleNavSmallScreen}
