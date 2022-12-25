@@ -6,8 +6,6 @@ import { RxCross2 } from "react-icons/rx";
 import Like from "../../../../components/Post/components/PostCard/components/Like/Like";
 
 export default function PostCard({ data, userId, dataUser }) {
-  console.log(data);
-
   const deletePost = async () => {
     if (confirm("Voulez-vous supprimer ce post ?")) {
       axios
@@ -47,9 +45,6 @@ export default function PostCard({ data, userId, dataUser }) {
         <div className={`${styles.comment_bar}`}></div>
         <div className={`${styles.comment_main}`}>
           <Like postId={data.id_post} />
-          <p>
-            100 <span>commentaires</span>
-          </p>
         </div>
       </div>
     </div>

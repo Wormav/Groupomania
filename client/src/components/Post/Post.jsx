@@ -58,8 +58,6 @@ export default function Post() {
     setPostLikes(post);
   };
 
-  console.log(postLikes);
-
   return (
     <div className={`${styles.container}`}>
       {post !== null ? (

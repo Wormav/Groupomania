@@ -6,9 +6,7 @@ export default function Filter({ filterValue, setFilterValue }) {
     setFilterValue(!filterValue);
   };
 
-  useEffect(() => {
-    console.log(filterValue);
-  }, [filterValue]);
+  useEffect(() => {}, [filterValue]);
 
   return (
     <div className={`${styles.container}`}>

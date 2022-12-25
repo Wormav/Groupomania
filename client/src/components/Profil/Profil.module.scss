@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  z-index: -1;
   flex-direction: column;
   align-items: center;
   padding-bottom: 50px;
@@ -25,6 +26,17 @@
   border-radius: 10px;
   object-fit: cover;
   top: 100px;
+}
+
+.pen {
+  font-size: 20px;
+  color: var(--primary);
+  margin-top: 30px;
+  margin-bottom: -20px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .pseudo {

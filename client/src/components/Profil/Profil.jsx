@@ -6,6 +6,8 @@ import { useState } from "react";
 import Follow from "./components/Follow/Follow";
 import PostProfil from "./components/PostProfil/PostProfil";
 import { useSelector } from "react-redux";
+import { BsPencil } from "react-icons/bs";
+import EditProfil from "./components/EditProfil/EditProfil";
 
 export default function Profil() {
   const url = window.location.pathname;
@@ -13,6 +15,7 @@ export default function Profil() {
 
   const [dataUser, setDataUser] = useState(null);
   const [dataPost, setDataPost] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
 
   const userIdCo = useSelector((state) => state.user).id_user;
 
@@ -41,7 +44,7 @@ export default function Profil() {
   useEffect(() => {
     getUser(userId);
     getPostUser(userId);
-  }, [userId]);
+  }, [userId, openModal]);
 
   return (
     <>
@@ -52,7 +55,18 @@ export default function Profil() {
             src={"../" + `${dataUser.user_picture}`}
           ></img>
           <div className={`${styles.card}`}>
+            {userIdCo === userId ? (
+              <BsPencil
+                className={`${styles.pen}`}
+                onClick={() => setOpenModal(true)}
+              />
+            ) : null}
+            {openModal && (
+              <EditProfil dataUser={dataUser} setOpenModal={setOpenModal} />
+            )}
+
             <h1 className={`${styles.pseudo}`}>{dataUser.user_username}</h1>
+
             <div className={`${styles.email_container}`}>
               <FiMail className={`${styles.email_icon}`} />
               <a
