@@ -9,6 +9,7 @@ import Filter from "./components/Filter/Filter";
 
 export default function Post() {
   const [post, setPost] = useState(null);
+  const [postLikes, setPostLikes] = useState(null);
   const [updatePost, setUpdatePost] = useState(false);
   const [filterValue, setFilterValue] = useState(false);
   const [likesData, setLikesData] = useState(null);
@@ -29,12 +30,14 @@ export default function Post() {
       })
       .then((res) => setLikesData(res.data))
       .catch((err) => console.log(err));
+
+    setPostLikes(null);
   };
 
   useEffect(() => {
-    if (filterValue === false) {
+    getPost();
+    if (filterValue === true) {
       getPost();
-    } else {
       putPost();
     }
   }, [updatePost, filterValue]);
@@ -52,9 +55,10 @@ export default function Post() {
         }
       });
     });
+    setPostLikes(post);
   };
 
-  console.log(post);
+  console.log(postLikes);
 
   return (
     <div className={`${styles.container}`}>
@@ -62,16 +66,27 @@ export default function Post() {
         <>
           <NewPost updatePost={updatePost} setUpdatePost={setUpdatePost} />
           <Filter filterValue={filterValue} setFilterValue={setFilterValue} />
-          {post &&
-            post.map((p) => (
-              <PostCard
-                key={p.id_post}
-                data={p}
-                userId={userId}
-                updatePost={updatePost}
-                setUpdatePost={setUpdatePost}
-              />
-            ))}{" "}
+          {postLikes
+            ? postLikes
+                .sort((a, b) => b.arrayLikes.length - a.arrayLikes.length)
+                .map((p) => (
+                  <PostCard
+                    key={p.id_post}
+                    data={p}
+                    userId={userId}
+                    updatePost={updatePost}
+                    setUpdatePost={setUpdatePost}
+                  />
+                ))
+            : post.map((p) => (
+                <PostCard
+                  key={p.id_post}
+                  data={p}
+                  userId={userId}
+                  updatePost={updatePost}
+                  setUpdatePost={setUpdatePost}
+                />
+              ))}
         </>
       ) : null}
     </div>
