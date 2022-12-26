@@ -8,6 +8,8 @@ Seventh project of the web developer course at Openclassrooms. The objective is 
 
 ![Capture d'écrant mobile](./docs/Screen%202.jpeg)
 
+Video presentation [here](https://youtu.be/lyVyJS1Gapw)
+
 ### Specifications
 
 - Using a javascript framework
@@ -58,6 +60,26 @@ Add an .env file in the config directory and configure it like this:
 You can then launch the backend with the command yarn start
 
 4. Configure the frontend
+
+Go to the customer directory
+
+Create an .env file and configure it like this:
+
+![exemple env](/docs/EnvFront.png)
+
+WARNING in the server.js file the port in correspond to the cors option
+
+5. Start the project
+
+Launch two terminals and run the following commands:
+
+```bash
+yarn start
+```
+
+```bash
+cd client / yarn dev
+```
 
 ## Contact
 
